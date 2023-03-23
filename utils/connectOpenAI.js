@@ -1,4 +1,5 @@
 const { Configuration, OpenAIApi } = require('openai')
+const { templateMCQ } = require('./templates')
 
 require('dotenv').config()
 
@@ -8,4 +9,17 @@ const configuration = new Configuration({
 })
 const openai = new OpenAIApi(configuration)
 
-module.exports = openai
+// Talking to openai
+const connectOpenAI = async () => {
+  return await openai.createChatCompletion({
+    model: 'gpt-3.5-turbo',
+    messages: [
+      { role: 'system', content: 'You are a quiz making bot.' },
+      { role: 'user', content: templateMCQ },
+    ],
+    temperature: 0.7,
+    top_p: 1,
+  })
+}
+
+module.exports = connectOpenAI
