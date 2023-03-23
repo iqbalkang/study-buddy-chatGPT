@@ -49,7 +49,12 @@ const postQuestion = asyncHandler(async (req, res, next) => {
 })
 
 const getQuestions = asyncHandler(async (req, res, next) => {
-  // const
+  const questions = await Question.find()
+
+  res.status(StatusCodes.OK).json({
+    status: 'success',
+    questions,
+  })
 })
 
 module.exports = {

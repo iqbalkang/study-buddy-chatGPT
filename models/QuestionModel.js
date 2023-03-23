@@ -34,10 +34,10 @@ class Question {
 
   static async find() {
     const query = `SELECT id, type, subject_id, ARRAY[option1, option2, option3, option4] as choices, answer 
-    FROM questions`
+                  FROM questions`
 
     const data = await db.query(query)
-    return data.rows[0]
+    return data.rows
   }
 }
 
