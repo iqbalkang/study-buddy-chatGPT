@@ -10,6 +10,7 @@ const generateQuiz = asyncHandler(async (req, res, next) => {
 
   // /api/v1/quiz/:subject?difficulty=1&quest_num=10&type=”mcq”
   const { difficulty, quest_num, type } = req.query
+  console.log(subject)
 })
 
 const saveQuiz = asyncHandler(async (req, res, next) => {
