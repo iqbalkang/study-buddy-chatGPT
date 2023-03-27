@@ -1,13 +1,29 @@
 const express = require('express')
-const { postQuestion, getQuestions } = require('../controllers/questionsController')
+const {
+  getQuestions,
+  getQuestion,
+  deleteQuestion,
+  updateQuestion,
+  saveQuestion,
+} = require('../controllers/questionsController')
 
 const router = express.Router()
 
-// Gets all questions from database
-// router.get('/all-questions', db.getQuestions)
+// POST
+// /api/v1/question
+router.post('/', saveQuestion)
 
-// Set it up as a get request to quickly test what should eventually be a post request
-router.post('/make-question', postQuestion)
-router.get('/all-questions', getQuestions)
+// GET
+// /api/v1/question/:id
+router.get('/', getQuestions)
+router.get('/:questionId', getQuestion)
+
+// PUT
+// /api/v1/question/:id
+router.put('/:questionId', updateQuestion)
+
+// DELETE
+// /api/v1/question/:id
+router.delete('/:questionId', deleteQuestion)
 
 module.exports = router

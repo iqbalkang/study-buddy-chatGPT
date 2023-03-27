@@ -8,8 +8,10 @@ const AppError = require('./utils/appError')
 const errorHandler = require('./controllers/errorsController')
 
 // Routers
-const authRouter = require('./routes/authRouter')
+const userRouter = require('./routes/userRouter')
 const questionsRouter = require('./routes/questionsRouter')
+const quizRouter = require('./routes/quizRouter')
+const cohortRouter = require('./routes/cohortRouter')
 
 const PORT = process.env.PORT
 const app = express()
@@ -18,8 +20,10 @@ app.use(express.json())
 app.use(cors())
 
 // API Routes
-app.use('/auth', authRouter)
-app.use('/questions', questionsRouter)
+app.use('/api/v1', userRouter)
+app.use('/api/v1/quiz', quizRouter)
+app.use('/api/v1/question', questionsRouter)
+app.use('/api/v1/cohort', cohortRouter)
 
 app.use('*', (req, res, next) => {
   return next(new AppError(`Could not find ${req.originalUrl}`, StatusCodes.NOT_FOUND))

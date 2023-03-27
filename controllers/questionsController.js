@@ -2,10 +2,10 @@ const { StatusCodes } = require('http-status-codes')
 const AppError = require('../utils/appError')
 const asyncHandler = require('express-async-handler')
 const Question = require('../models/QuestionModel')
-const connectOpenAI = require('../utils/connectOpenAI')
+const connectOpenAI = require('../openAI/connectOpenAI')
 const answerIndex = require('../utils/answerIndex')
 
-const postQuestion = asyncHandler(async (req, res, next) => {
+const saveQuestion = asyncHandler(async (req, res, next) => {
   const chat = await connectOpenAI()
 
   const content = chat.data.choices[0].message.content.replace(/\n/g, 'NEwlInE')
@@ -57,7 +57,25 @@ const getQuestions = asyncHandler(async (req, res, next) => {
   })
 })
 
+const getQuestion = asyncHandler(async (req, res, next) => {
+  const { questionId } = req.params
+  console.log(questionId)
+})
+
+const updateQuestion = asyncHandler(async (req, res, next) => {
+  const { questionId } = req.params
+  console.log(questionId)
+})
+
+const deleteQuestion = asyncHandler(async (req, res, next) => {
+  const { questionId } = req.params
+  console.log(questionId)
+})
+
 module.exports = {
-  postQuestion,
+  saveQuestion,
   getQuestions,
+  getQuestion,
+  updateQuestion,
+  deleteQuestion,
 }
