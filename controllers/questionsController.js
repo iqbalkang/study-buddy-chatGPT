@@ -3,39 +3,13 @@ const AppError = require('../utils/appError')
 const asyncHandler = require('express-async-handler')
 const Question = require('../models/QuestionModel')
 const connectOpenAI = require('../openAI/connectOpenAI')
-const answerIndex = require('../utils/answerIndex')
+const { parsingMCQ } = require('../utils/regex')
 
 const saveQuestion = asyncHandler(async (req, res, next) => {
   const chat = await connectOpenAI()
 
   const content = chat.data.choices[0].message.content.replace(/\n/g, 'NEwlInE')
-  const question = content.match(/^Q\..*?(?=A\.)/g)[0].replace(/NEwlInE/g, '\n')
-  const option1 = content
-    .match(/A\..*?(?=B\.)/g)[0]
-    .replace(/NEwlInE/g, '')
-    .replace(/A\./, '')
-    .trim()
-  const option2 = content
-    .match(/B\..*?(?=C\.)/g)[0]
-    .replace(/NEwlInE/g, '')
-    .replace(/B\./, '')
-    .trim()
-  const option3 = content
-    .match(/C\..*?(?=D\.)/g)[0]
-    .replace(/NEwlInE/g, '')
-    .replace(/C\./, '')
-    .trim()
-  const option4 = content
-    .match(/D\..*?(?=Answer)/g)[0]
-    .replace(/NEwlInE/g, '')
-    .replace(/D\./, '')
-    .trim()
-  const answer = answerIndex(
-    content
-      .match(/Answer:.*/g)[0]
-      .replace(/Answer:/g, '')
-      .trim()
-  )
+  const {question, option1, option2, option3, option4, answer} = parsingMCQ(content, 1)
 
   const questionObj = new Question('mcq', 1, question, option1, option2, option3, option4, answer, 5)
   const newQuestion = await questionObj.save()

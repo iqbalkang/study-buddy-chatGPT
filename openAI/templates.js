@@ -1,5 +1,5 @@
 const templateMCQ = `Example of a multiple choice question:\n
-                    Q. What is the syntax for a for loop in Javascript?\n
+                    Q1. What is the syntax for a for loop in Javascript?\n
                     A. for(i=0, i < 10, i++)\n
                     B.\n
                     C.\n
