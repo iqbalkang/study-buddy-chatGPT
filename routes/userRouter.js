@@ -18,6 +18,5 @@ router.put('/user/:userId', updateUser)
 // /api/v1/user/:id
 router.get('/user/:userId', getUser)
 // /api/v1/user/quiz
-// /api/v1/user/quiz/:id
 
 module.exports = router
