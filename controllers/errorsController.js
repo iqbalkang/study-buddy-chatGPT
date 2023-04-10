@@ -1,17 +1,20 @@
 const sendErrorDev = (err, res) => {
+  console.log(err.stack);
   res.status(err.statusCode).json({
     status: err.status,
     error: err,
-    message: err.message,
-    // stack: err.stack,
+    isError: true,
+    message: err.message
   })
 }
 
 const sendErrorProd = (err, res) => {
   // Operational, trusted error: send message to client
   if (err.isOperational) {
+    console.log(err.message);
     res.status(err.statusCode).json({
       status: err.status,
+      isError: true,
       message: err.message,
     })
 
@@ -22,9 +25,10 @@ const sendErrorProd = (err, res) => {
 
     // 2) Send generic message
     res.status(500).json({
-      status: 'error',
-      message: 'Something went very wrong!',
-    })
+      status: "error",
+      isError: true,
+      message: "Something went very wrong!",
+    });
   }
 }
 

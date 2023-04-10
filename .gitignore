@@ -1,4 +1,4 @@
 .env
 node_modules
-.DS_stores
+.DS_store
 Data.json

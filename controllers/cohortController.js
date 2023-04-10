@@ -1,9 +1,9 @@
 const { StatusCodes } = require('http-status-codes')
 const AppError = require('../utils/appError')
 const asyncHandler = require('express-async-handler')
-const Question = require('../models/QuestionModel')
-const connectOpenAI = require('../openAI/connectOpenAI')
-const answerIndex = require('../utils/answerIndex')
+const Question = require('../models/questionModel')
+//const connectOpenAI = require('../openAI/connectOpenAI')
+
 
 const getCohorts = asyncHandler(async (req, res, next) => {
   console.log('all cohorts')
